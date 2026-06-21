@@ -87,34 +87,30 @@ public class LinkedList<T>
 
 
     // Removes the last node from the list and returns its data.
-     public T? RemoveBack()
+     public T? DeleteLast()
     {
         // Note: keep in mind that removing the last node requires a reference
         // to the *second* last node.
 
-        if (head == null) //if the list is empty then return default
+        if (tail == null) //if the list is empty then return default
         return default;
 
-        if (head == tail) //check if only one node exists
+        T data = tail.data; //save the data
+
+        if (head == tail)//if there is only one now then delete it, set head and tail to null
         {
-            T data = head.data; //Save the data and delete the node 
             head = null; //head and tail are both the same node so they are both null
             tail = null;
-            return data;
         }
 
-        Node<T>? curr = head; 
-
-        while (curr.next != tail) //stops at second to last node (stop if two pos from curr are null)
+        else //otherwise if there is more than one node then:
         {
-            curr = curr.next;
+            tail = tail.prev; //sets tail to second last node
+            tail.next = null; //delete the last node (old tail)
+
+
         }
-
-        T removedData = tail.data; //store the remove data 
-        tail = curr;
-        tail.next = null; //remove the last node
-
-        return removedData;
+        return data; //return the data
     } 
     
 

@@ -4,7 +4,7 @@ internal class Node<T>
 {
     public T data;
     public Node<T>? next;
-    // public Node<T>? prev; // For the assignment
+    public Node<T>? prev;
 
     public Node(T data)
     {
@@ -30,15 +30,16 @@ public class LinkedList<T>
     {
         Node<T> newNode = new Node<T>(toAdd);
 
-        if (head == null) //checks if head is null then head == tails
+        if (head == null) //checks if head is null then head == tails, because without head list is empty so head = tail
         {
             head = newNode;
             tail = newNode;
             return;
         }
         
-        newNode.next = head;
-        head = newNode;
+        newNode.next = head; //point to current head (/old), old head comes after it
+        head.prev = newNode; //old (/current) head point to new node, new node is before it
+        head = newNode; //new head moves to new node; list head reference
     }
 
     // Adds a new element to the back of the list.
@@ -57,6 +58,7 @@ public class LinkedList<T>
 
 
         tail.next = newNode; //connects tail to new node
+        newNode.prev = tail; //new node points to the node before it (old)
         tail = newNode; // moves the tail 
     } 
 

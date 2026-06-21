@@ -63,17 +63,25 @@ public class LinkedList<T>
     } 
 
     // Removes the first node from the list and returns its data.
-    public T? RemoveFront()
+    public T? DeleteFirst()
     {
+
         if (head == null)
             return default;
             
-        T data = head.data;
-        head = head.next;
+      T data = head.data;
 
-        if (head == null)
-        tail = null;
+        if (head.next != null) //confirm that there is more than one node in list
+        {
+        head = head.next; //set the head to the second node
+        head.prev = null; //delete the first node (old head)
+        }
 
+        else //if there is only one node then delete it
+        {
+            head = null;
+            tail = null;
+        }
         return data;
     }
 

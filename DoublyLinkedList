@@ -1,5 +1,5 @@
 namespace Assignment3;
-
+//base code form linked list lab
 internal class Node<T>
 {
     public T data;

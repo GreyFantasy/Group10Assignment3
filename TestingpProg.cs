@@ -18,18 +18,26 @@ class TestingProg
         faculty.AddLast("Bin");
         faculty.AddFirst("Quazi");
         Console.WriteLine("List with several elements: {0}\n", faculty.ToStringForward());
+        Console.WriteLine("count of faculty: {0}\n", faculty.GetCount()); 
 
         Console.WriteLine("Removed from front: {0}", faculty.DeleteFirst() ?? "null");
+        Console.WriteLine("count of faculty: {0}\n", faculty.GetCount()); 
         Console.WriteLine("Removed from back:  {0}", faculty.DeleteLast() ?? "null");
+        Console.WriteLine("count of faculty: {0}\n", faculty.GetCount()); 
         Console.WriteLine("After removing:     {0}\n", faculty.ToStringForward());
 
         Console.WriteLine("Removed from front: {0}", faculty.DeleteFirst() ?? "null");
+        Console.WriteLine("count of faculty: {0}\n", faculty.GetCount()); 
         Console.WriteLine("Removed from back:  {0}", faculty.DeleteLast() ?? "null");
+        Console.WriteLine("count of faculty: {0}\n", faculty.GetCount()); 
         Console.WriteLine("After removing:     {0}\n", faculty.ToStringForward());
 
         Console.WriteLine("Attempting to remove from empty list:");
+        Console.WriteLine("count of faculty: {0}\n", faculty.GetCount()); 
         Console.WriteLine("Removed from front: {0}", faculty.DeleteFirst() ?? "null");
+        Console.WriteLine("count of faculty: {0}\n", faculty.GetCount()); 
         Console.WriteLine("Removed from back:  {0}", faculty.DeleteLast() ?? "null");
+        Console.WriteLine("count of faculty: {0}\n", faculty.GetCount()); 
         Console.WriteLine("Final list:         {0}\n", faculty.ToStringForward());
 
         Console.WriteLine("--- Staff list: ---\n");
@@ -37,17 +45,21 @@ class TestingProg
         DoublyLinkedList<string> staff = new DoublyLinkedList<string>();
         staff.AddFirst("Jamie");
         Console.WriteLine("Added to front:     {0}", staff.ToStringForward());
+         Console.WriteLine("count of staff: {0}\n", staff.GetCount()); 
         Console.WriteLine("Removed from back:  {0}", staff.DeleteLast() ?? "null");
 
         staff.AddLast("Trevor");
         Console.WriteLine("Added to back:      {0}", staff.ToStringForward());
+         Console.WriteLine("count of staff: {0}\n", staff.GetCount()); 
         Console.WriteLine("Removed from front: {0}", staff.DeleteFirst() ?? "null");
+         Console.WriteLine("count of staff: {0}\n", staff.GetCount()); 
 
         Console.WriteLine("Final list:         {0}\n", staff.ToStringForward());
 
         Console.WriteLine("--- SortableObjects list: ---\n");
 
-        faculty.AddFirst("Brian");
+        faculty.AddFirst("Brian"); // names added for tesitng
+
         faculty.AddLast("Bin");
         faculty.AddFirst("Quazi");
         staff.AddFirst("Jamie");

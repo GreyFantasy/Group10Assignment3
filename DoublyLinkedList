@@ -12,47 +12,56 @@ internal class Node<T>
     }
 }
 
-public class LinkedList<T>
+public class DoublyLinkedList<T>
 {
     private Node<T>? head;
     private Node<T>? tail; // For later in the lab
 
-
-
-    public LinkedList()
+    public DoublyLinkedList()
     {
         head = null;
         tail = null; //added tail with no value (used to track last node)
     }
+    private int count = 0;
+
+    public int GetCount() //return count value
+    {
+        
+                return  count;
+    }
+     
+        
 
     // Adds a new element to the front of the list.
-    public void AddFront(T toAdd)
+    public void AddFirst(T toAdd)
     {
         Node<T> newNode = new Node<T>(toAdd);
 
-        if (head == null) //checks if head is null then head == tails, because without head list is empty so head = tail
+        if (head == null) //checks if head is null then head and tails point to one new node, because without head list is empty
         {
             head = newNode;
             tail = newNode;
+            count++; //only 1 node in list, count goes up
             return;
         }
         
         newNode.next = head; //point to current head (/old), old head comes after it
         head.prev = newNode; //old (/current) head point to new node, new node is before it
         head = newNode; //new head moves to new node; list head reference
+        count++; //increases count on addition
     }
 
     // Adds a new element to the back of the list.
-    public void AddBack(T toAdd)
+    public void AddLast(T toAdd)
     {
-        // Note: `ToStringForward` shows how to traverse a LinkedList.
 
         Node<T> newNode = new Node<T>(toAdd);
 
         if (head == null) //checks if the list is empty at point
         {
             head = newNode; //if so then the new node becomes the firs node
-            tail = newNode; // on first insertion head == tail
+            tail = newNode; // on first insertion head and tail point to same node
+            count++; //count goes up
             return;
         }
 
@@ -60,6 +69,7 @@ public class LinkedList<T>
         tail.next = newNode; //connects tail to new node
         newNode.prev = tail; //new node points to the node before it (old)
         tail = newNode; // moves the tail 
+        count++; //count goes up
     } 
 
     // Removes the first node from the list and returns its data.
@@ -75,12 +85,14 @@ public class LinkedList<T>
         {
         head = head.next; //set the head to the second node
         head.prev = null; //delete the first node (old head)
+        count--; //minus count on deletion
         }
 
         else //if there is only one node then delete it
         {
             head = null;
             tail = null;
+            count--; //minus count on deletion
         }
         return data;
     }
@@ -101,13 +113,14 @@ public class LinkedList<T>
         {
             head = null; //head and tail are both the same node so they are both null
             tail = null;
+            count--; //count decrease on deletion
         }
 
         else //otherwise if there is more than one node then:
         {
             tail = tail.prev; //sets tail to second last node
             tail.next = null; //delete the last node (old tail)
-
+            count--; //count decrease on deletion
 
         }
         return data; //return the data
@@ -174,7 +187,7 @@ public class LinkedList<T>
         throw new NotImplementedException();
     }
 
-    public LinkedList<T> Merge(LinkedList<T> listToAdd)
+    public DoublyLinkedList<T> Merge(DoublyLinkedList<T> listToAdd)
     {
         throw new NotImplementedException();
     }
@@ -196,7 +209,7 @@ public class LinkedList<T>
         throw new NotImplementedException();
     }
 
-    public override string ToString()
+    public override string ToStringForward()
     {
         string s = "";
 
@@ -214,6 +227,17 @@ public class LinkedList<T>
 
     public string ToStringReverse()
     {
-        throw new NotImplementedException();
+        string s = ""; 
+
+        Node<T>? curr = tail; //current starts at the tail and move moves to head
+        while (curr != null)
+        {
+            s += curr.data?.ToString();
+            if (curr.prev != null) //follows the path prev
+                s += ", ";
+            curr = curr.prev;
+        }
+
+        return s;
     }
 }

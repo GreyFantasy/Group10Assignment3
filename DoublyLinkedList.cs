@@ -19,8 +19,8 @@ public class DoublyLinkedList<T>
 
     public DoublyLinkedList()
     {
-        head = null;
-        tail = null; //added tail with no value (used to track last node)
+        head = null; // list starts empty, head = null
+        tail = null; // list starts empty, tail = null
     }
     private int count = 0;
 
@@ -209,11 +209,12 @@ public class DoublyLinkedList<T>
         throw new NotImplementedException();
     }
 
-    public override string ToStringForward()
+
+    public  string ToStringForward()
     {
         string s = "";
 
-        Node<T>? curr = head;
+        Node<T>? curr = head; //current starts at head and move to tail
         while (curr != null)
         {
             s += curr.data?.ToString();
@@ -229,7 +230,7 @@ public class DoublyLinkedList<T>
     {
         string s = ""; 
 
-        Node<T>? curr = tail; //current starts at the tail and move moves to head
+        Node<T>? curr = tail; //current starts at the tail and moves to head
         while (curr != null)
         {
             s += curr.data?.ToString();

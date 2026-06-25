@@ -32,7 +32,7 @@ public class Snake : Animal
     }
 
     // This modifies SmellList with all animals that are within a 10 unit radius, and 
-    // checks for other predators in 
+    // checks for other predators in range
     public void Smell(DoublyLinkedList<Animal> allAnimals, Bird[] birds, bool[] eaten)
     {
         SmellList = new DoublyLinkedList<Animal>();

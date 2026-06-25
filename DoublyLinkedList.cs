@@ -22,15 +22,20 @@ public class DoublyLinkedList<T>
         head = null; // list starts empty, head = null
         tail = null; // list starts empty, tail = null
     }
+
+    // puts out the head so other classes can traverse the list
+    public Node<T>? Head { get { return head; } }
+
+
     private int count = 0;
 
     public int GetCount() //return count value
     {
-        
-                return  count;
+
+        return count;
     }
-     
-        
+
+
 
     // Adds a new element to the front of the list.
     public void AddFirst(T toAdd)
@@ -44,7 +49,7 @@ public class DoublyLinkedList<T>
             count++; //only 1 node in list, count goes up
             return;
         }
-        
+
         newNode.next = head; //point to current head (/old), old head comes after it
         head.prev = newNode; //old (/current) head point to new node, new node is before it
         head = newNode; //new head moves to new node; list head reference
@@ -70,7 +75,7 @@ public class DoublyLinkedList<T>
         newNode.prev = tail; //new node points to the node before it (old)
         tail = newNode; // moves the tail 
         count++; //count goes up
-    } 
+    }
 
     // Removes the first node from the list and returns its data.
     public T? DeleteFirst()
@@ -78,14 +83,14 @@ public class DoublyLinkedList<T>
 
         if (head == null)
             return default;
-            
-      T data = head.data;
+
+        T data = head.data;
 
         if (head.next != null) //confirm that there is more than one node in list
         {
-        head = head.next; //set the head to the second node
-        head.prev = null; //delete the first node (old head)
-        count--; //minus count on deletion
+            head = head.next; //set the head to the second node
+            head.prev = null; //delete the first node (old head)
+            count--; //minus count on deletion
         }
 
         else //if there is only one node then delete it
@@ -99,13 +104,13 @@ public class DoublyLinkedList<T>
 
 
     // Removes the last node from the list and returns its data.
-     public T? DeleteLast()
+    public T? DeleteLast()
     {
         // Note: keep in mind that removing the last node requires a reference
         // to the *second* last node.
 
         if (tail == null) //if the list is empty then return default
-        return default;
+            return default;
 
         T data = tail.data; //save the data
 
@@ -124,8 +129,8 @@ public class DoublyLinkedList<T>
 
         }
         return data; //return the data
-    } 
-    
+    }
+
 
     public bool Find(T toFind)
     {
@@ -210,7 +215,7 @@ public class DoublyLinkedList<T>
     }
 
 
-    public  string ToStringForward()
+    public string ToStringForward()
     {
         string s = "";
 
@@ -228,7 +233,7 @@ public class DoublyLinkedList<T>
 
     public string ToStringReverse()
     {
-        string s = ""; 
+        string s = "";
 
         Node<T>? curr = tail; //current starts at the tail and moves to head
         while (curr != null)

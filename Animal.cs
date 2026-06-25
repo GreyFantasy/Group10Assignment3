@@ -75,6 +75,36 @@ public class Animal
         return Math.Sqrt(dx * dx + dy * dy + dz * dz);
     }
 
+    // notifies predators within range that an animal is nearby
+    // Rebuilds all predator HearLists each call
+    public void HearMovement(DoublyLinkedList<Animal> allAnimals, double speed)
+    {
+        // clears all predator lists
+        Node<Animal>? curr = allAnimals.Head;
+        while (curr != null)
+        {
+            curr.data.HearList = new DoublyLinkedList<Animal>();
+            curr = curr.next;
+        }
+
+        // this notifies predators around based on speed
+        curr = allAnimals.Head;
+        while (curr != null)
+        {
+            Animal predator = curr.data;
+            double dist = predator.FindDistance(this);
+
+            if (predator is Cat && speed > 5 && dist <= 15)
+                predator.HearList.AddLast(this);
+            else if (predator is Snake && speed > 10 && dist <= 10)
+                predator.HearList.AddLast(this);
+
+            curr = curr.next;
+        }
+
+
+    }
+
 
 
 

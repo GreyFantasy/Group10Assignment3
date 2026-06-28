@@ -92,6 +92,12 @@ class Program
                 if (predator == null)
                     continue;
 
+                //calls Smell() for each predator
+                if (predator is Cat cat)
+                    cat.Smell(animals, birds, eaten);
+                else if (predator is Snake snake)
+                    snake.Smell(animals, birds, eaten);
+
                 //look for nearest bird (alive)
                 int nearestIndex = -1; //initially assume there is no nearest bird
                 double nearestDist = double.MaxValue; //the initial assumed nearest distance is max
@@ -113,6 +119,11 @@ class Program
 
                 double range = (predator is Cat) ? 8 : 3; //cat range of 8 and snake range 3 (conditional to if it is a cat or snake)
                 double speed = (predator is Cat) ? 16 : 14; //cat move speed 16 and snake move speed 14
+
+                // output of the bird the predator has heard and smelt
+
+                Console.WriteLine(predator.Name + " has heard: " + predator.HearList.ToStringForward());
+                Console.WriteLine(predator.Name + " has smelt: " + predator.SmellList.ToStringForward());
 
                 if (nearestDist <= range)
                 {

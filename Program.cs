@@ -7,6 +7,7 @@
 
 // make an array that has 10 birds at random positions choose from the rules for birds name and positions that is provided.
 using System;
+using System.ComponentModel;
 namespace Assignment3;
 
 class Program
@@ -19,30 +20,27 @@ class Program
         Console.SetWindowSize(200, 70);
 
         //first part, creating the cats with AddFront
-        ArrayList<Animal> cats = new ArrayList<Animal>(); //addFront, cats onto list
-        cats.AddFront(new Cat("Whiskers", 3, new Position(5, 10, 0), Cat.Breed.Bengal));
-        cats.AddFront(new Cat("Shadow", 5, new Position(12, 8, 0), Cat.Breed.Serval));
-        cats.AddFront(new Cat("Luna", 2, new Position(20, 15, 0), Cat.Breed.Ocicat));
+        DoublyLinkedList<Animal> animals = new DoublyLinkedList<Animal>(); //Array list Replaced with Doubly Linked List storing cats and snakes under animals
+
+        animals.AddFirst(new Cat("Whiskers", 3, new Position(5, 10, 0), Cat.Breed.Bengal));
+        animals.AddFirst(new Cat("Shadow", 5, new Position(12, 8, 0), Cat.Breed.Serval));
+        //removed last cat so there is only 2
 
         //next, adding snakes using AddLast
 
-        ArrayList<Animal> snakes = new ArrayList<Animal>(); //addLast, snakes onto list
-        snakes.AddLast(new Snake("Sly", 3, new Position(7, 10, 3), 1.2, true));
-        snakes.AddLast(new Snake("Viper", 5, new Position(15, 20, 0), 2.1, true));
-        snakes.AddLast(new Snake("Noodle", 2, new Position(25, 5, 0),0.8, false));
+        animals.AddLast(new Snake("Sly", 3, new Position(7, 10, 3), 1.2, true));
+        animals.AddLast(new Snake("Viper", 5, new Position(15, 20, 0), 2.1, true));
+        //removed last snake so there is only 2
 
-
-        // merging both lists into one
-
-        ArrayList<Animal> animals = ArrayList<Animal>.Merge(cats, snakes);
+        //ArrayList<Animal> animals = ArrayList<Animal>.Merge(cats, snakes);
 
         //testing the print method
 
-        Console.WriteLine("-Print All Forward-"); //test printallforward
-        Console.WriteLine(animals.StringPrintAllForward());
+        Console.WriteLine("-Print All Forward-"); //updated forward and reverse tostring to work with updated methods in doubly linked list
+        Console.WriteLine(animals.ToStringForward());
 
-        Console.WriteLine("-Print All Reverse-"); //test printallreverse
-        Console.WriteLine(animals.StringPrintAllReverse()); //works
+        Console.WriteLine("-Print All Reverse-"); 
+        Console.WriteLine(animals.ToStringReverse()); 
 
         //Now adding the array of 10 birds w random positions, (chosen from name and pos rules)
 
@@ -91,7 +89,12 @@ class Program
             // bird/snake takes turn
             for (int a = 0; a < animals.GetCount(); a++) //loops through the animals in the list and stores the current in predator
             {
-                Animal predator = animals[a];
+                //DLL replacement for the Array list indexing
+                //using GetaAt(), the list is traversed and item at requested position is returned
+                Animal? predator = animals.GetAt(a); 
+
+                if (predator == null)
+                    continue;
 
                 //look for nearest bird (alive)
                 int nearestIndex = -1; //initially assume there is no nearest bird

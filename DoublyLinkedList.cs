@@ -39,6 +39,21 @@ public class DoublyLinkedList<T>
     }
 
 
+    //workaround replacement to the arraylist indexer, provides item at a specified index to program
+    public T? GetAt(int index) 
+    {
+        if (index < 0 || index >= count) 
+            return default;
+        
+        Node<T>? curr = head;  //starts at head and moves through till it reaches the needed position and returns that
+
+        for (int i = 0; i < index; i++)
+        {
+            curr = curr.next;
+        }
+
+        return curr.data;
+    }
 
     // Adds a new element to the front of the list.
     public void AddFirst(T toAdd)

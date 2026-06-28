@@ -120,24 +120,17 @@ class Program
 
                 if (nearestDist <= range)
                 {
-                    //eating the bird
-                    if (predator is Cat) //check if predator is cat
-                    ((Cat)predator).Eat(birds[nearestIndex]); //if so then the Cat is eating the closest bird
-                    else
-                    ((Snake)predator).Eat(birds[nearestIndex]); //otherwise the snake is eating the closest bird
+                    //Moved the Eating Behavior into Animal Class
+                    //If more predators need to be added they can just inherit Eat() rather than needing type checking
+                    predator.Eat(birds[nearestIndex]);
 
                     eaten[nearestIndex] = true;
                 }
                 else
                 {
-                    //if the bird is out of range then go towards nearest bird
-                    double dx = birds[nearestIndex].Position.X - predator.Position.X;
-                    double dy = birds[nearestIndex].Position.Y - predator.Position.Y;
-                    double dist = Math.Sqrt(dx * dx + dy * dy);
-
-                    double moveX = (dx / dist) * speed; //splitting the vector by taking the straight line distance and dividing (x,y)
-                    double moveY = (dy / dist) * speed; //by it so the speed applied to x and y result in vector speed of the predator
-                    predator.Move(moveX, moveY, 0); //in the exact direction of the nearest bird
+                    //movement now handled by Animal
+                    //MoveTowards() called from Animal with target bird specified
+                    predator.MoveTowards(birds[nearestIndex], speed);
                 }
             }
 

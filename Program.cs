@@ -1,13 +1,6 @@
-﻿//todo
-//create arralist of Animals containing 3 cats using the Addfront
-// same with 3 snakes but addlast
-
-//merge the two lists
-//test  printallforward, print all reverse on the new arraylist
-
-// make an array that has 10 birds at random positions choose from the rules for birds name and positions that is provided.
+﻿
 using System;
-using System.ComponentModel;
+using System.IO;
 namespace Assignment3;
 
 class Program
@@ -42,14 +35,18 @@ class Program
         Console.WriteLine("-Print All Reverse-"); 
         Console.WriteLine(animals.ToStringReverse()); 
 
-        //Now adding the array of 10 birds w random positions, (chosen from name and pos rules)
+        //Now adding the array of birdCount birds w random positions, (chosen from name and pos rules)
 
         Random rand = new Random(); //Random num gen
-        string[] birdNames = { "Tweety", "Zazu", "Iago", "Hula", "Manu", "Couscous", "Roo", "Tookie", "Plucky", "Kiwi" }; //array names for birds
+        string[] birdNames = File.ReadAllLines("BirdNames.txt"); //array for bird names, names are taken from the file rather than hard coding them like i did initially
 
-        Bird[] birds = new Bird[10]; //array size for birds
+        //added variable for birdcount
+        int birdCount = 25;
 
-        for (int i = 0; i < 10; i++) //loops ten times; once for each bird in array
+        Bird[] birds = new Bird[birdCount]; //array size for birds
+        bool[] eaten = new bool[birdCount]; //bool of if bird is eaten in list
+
+        for (int i = 0; i < birdCount; i++) //loops ten times; once for each bird in array
         {
             Position birdPos = new Position( rand.Next(0, 101), rand.Next(0, 71), rand.Next(0, 11)); //random starting pos or X:(0 - 100), Y:(0 - 70), Z:(0 - 10)
             birds[i] = new Bird(birdNames[i], rand.Next(1, 6), birdPos); //creates bird with random: Name, Age  ( 1-5), position
@@ -63,7 +60,6 @@ class Program
         //loop for eating bird sim
 
         int round = 0; //rounds counter start at zero and count from, till no birds left
-        bool[] eaten = new bool[10]; // tracks for the birds eaten from total
         
        
         Console.Clear();
@@ -73,7 +69,7 @@ class Program
         {
             //see if all the birds hav been eaten
             bool allEaten = true; //assume all birds eaten
-            for (int i = 0; i < 10; i++) if (!eaten[i]) //!eaten[i] confirm if even 1 bird is not eaten, set all eaten to false
+            for (int i = 0; i < birdCount; i++) if (!eaten[i]) //!eaten[i] confirm if even 1 bird is not eaten, set all eaten to false
             {
                 allEaten = false;
                 break;
@@ -100,7 +96,7 @@ class Program
                 int nearestIndex = -1; //initially assume there is no nearest bird
                 double nearestDist = double.MaxValue; //the initial assumed nearest distance is max
 
-                for (int b = 0; b < 10; b++) //loop through the birds
+                for (int b = 0; b < birdCount; b++) //loop through the birds
                 {
                     if (eaten[b]) continue; //skip the eaten birds
                     double dx = birds[b].Position.X - predator.Position.X; //straight line calculation for the distance
@@ -136,7 +132,7 @@ class Program
 
             //uneated birds move randomly (like before)
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < birdCount; i++)
             {
                 if (!eaten[i])
                 birds[i].MoveRandom(animals); //passes list of animal. predators that are close hear bird move
@@ -160,7 +156,7 @@ class Program
                 string cell = "  "; // the empty cell default of two spaces
 
                 //check if that is a bird at this position
-                for (int b = 0; b < 10; b++)
+                for (int b = 0; b < birds.Length; b++)
                 {
                     if (!eaten[b] && (int)birds[b].Position.X == col && (int)birds[b].Position.Y == row)
                     cell = "B" + b; // go through birds like B1, B2, B3 etc.

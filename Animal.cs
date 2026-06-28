@@ -58,6 +58,28 @@ public class Animal
         Position.Move(dx, dy, dz);
     }
 
+    //moved the movement processing from the program to this class, inherited by predators
+    public void MoveTowards(Bird bird, double speed)
+    {
+        //same as movement calc in Assignment 2 program for the most part, just copied over
+        //Animal handles moving itself to the bird
+        double dx = bird.Position.X - Position.X; 
+        double dy = bird.Position.Y - Position.Y;
+        double dist = Math.Sqrt(dx * dx + dy * dy);
+
+        double moveX = (dx / dist) * speed; //split into the X and Y components, while it maintains its straight line speed
+        double moveY = (dy / dist) * speed; 
+        
+        Move(moveX, moveY, 0); //inherited by predator so it isnt specified to them (like it was in program), as Move() in inherited
+
+    }
+
+    public void Eat(Bird bird) //Inherited by Cat and Snake
+    {
+        
+        Console.WriteLine(Name + " has eaten " + bird.Name); //prints the predator and the bird that is eaten
+    }
+
     public override string ToString() //String for output
     {
 

@@ -1,5 +1,5 @@
-﻿namespace Assignment3;
-
+﻿using System;
+namespace Assignment3;
 class SortableObject : IComparable<SortableObject>, IEquatable<SortableObject>
 {
     public int Key { get; set; }

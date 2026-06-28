@@ -1,4 +1,7 @@
+using System;
+namespace Assignment3;
 public class Animal
+
 {
     private static int nextId = 1;
 

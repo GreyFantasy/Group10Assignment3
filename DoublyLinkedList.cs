@@ -1,3 +1,4 @@
+using System;
 namespace Assignment3;
 //base code form linked list lab
 internal class Node<T>
@@ -12,6 +13,8 @@ internal class Node<T>
     }
 }
 
+
+
 public class DoublyLinkedList<T>
 {
     private Node<T>? head;
@@ -24,7 +27,7 @@ public class DoublyLinkedList<T>
     }
 
     // puts out the head so other classes can traverse the list
-    public Node<T>? Head { get { return head; } }
+    internal Node<T>? Head { get { return head; } } //made Node<T>? Head internate so it matched the accessibility of Node<T>, avoiding conflict
 
 
     private int count = 0;

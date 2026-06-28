@@ -1,3 +1,5 @@
+using System;
+namespace Assignment3;
 public class ArrayList<T> where T : IComparable<T>
 {
     private T[] data;

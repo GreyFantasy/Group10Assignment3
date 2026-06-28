@@ -1,3 +1,6 @@
+using System;
+namespace Assignment3;
+
 public class Cat : Animal
 {
     public enum Breed

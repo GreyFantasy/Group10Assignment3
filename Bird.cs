@@ -1,5 +1,5 @@
 using System;
-
+namespace Assignment3; 
 public class Bird : Animal
 {
     private static Random rand = new Random();
@@ -34,7 +34,7 @@ public class Bird : Animal
         speed = Math.Sqrt(dx * dx + dy * dy + dz * dz);
 
         // notifies  predators around if the speed exceeds their hearing threshold
-        HearMovement(allAnimals, speed);
+        HearMovement(DoublyLinkedList<Animal>, allAnimals);
     }
 
     // override method to fit class

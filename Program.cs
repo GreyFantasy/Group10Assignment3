@@ -6,8 +6,8 @@
 //test  printallforward, print all reverse on the new arraylist
 
 // make an array that has 10 birds at random positions choose from the rules for birds name and positions that is provided.
-
 using System;
+namespace Assignment3;
 
 class Program
 {

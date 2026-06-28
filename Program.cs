@@ -146,7 +146,7 @@ class Program
             for (int i = 0; i < 10; i++)
             {
                 if (!eaten[i])
-                birds[i].MoveRandom();
+                birds[i].MoveRandom(animals); //passes list of animal. predators that are close hear bird move
             }
                 
         }
@@ -156,7 +156,7 @@ class Program
 
     }
 
-    static void DrawGrid(ArrayList<Animal> animals, Bird[] birds, bool[] eaten, int round)
+    static void DrawGrid(DoublyLinkedList<Animal> animals, Bird[] birds, bool[] eaten, int round) //updated DrawGrid to use DLL instead of ArrayList
     {
         Console.SetCursorPosition(0, 0); //go to top left end of each round
 
@@ -177,7 +177,12 @@ class Program
                 //now check if there is a predator in this position
                 for (int a = 0; a < animals.GetCount(); a++)
                 {
-                    Animal predator = animals[a];
+                    //same as main predator loop, drawgrid also loops through the passed list, GetAt() returns item at the requested position
+                    Animal? predator = animals.GetAt(a); 
+
+                    if (predator == null)
+                        continue;
+
                     if ((int)predator.Position.X == col && (int)predator.Position.Y == row)
                     {
                         if (predator is Cat)

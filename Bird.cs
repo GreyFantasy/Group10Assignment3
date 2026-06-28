@@ -11,7 +11,7 @@ public class Bird : Animal
 
     // moves the bird randomly within its allowed range, calculates the speed and 
     // informs predators nearby throufgh HearMovement if the speed exceeds their hearing thresholds
-    public void MoveRandom()
+    public void MoveRandom(DoublyLinkedList<Animal> allAnimals) //updated so list is passed into the method and allAnimals is able to be used and compiled
     {
 
         // speed 
@@ -34,7 +34,7 @@ public class Bird : Animal
         speed = Math.Sqrt(dx * dx + dy * dy + dz * dz);
 
         // notifies  predators around if the speed exceeds their hearing threshold
-        HearMovement(DoublyLinkedList<Animal>, allAnimals);
+        HearMovement(allAnimals, speed);
     }
 
     // override method to fit class
